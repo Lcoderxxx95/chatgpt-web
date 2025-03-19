@@ -3,13 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChatGPT Instant Access</title>
+    <title>Chatbot</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        #chatbox { width: 80%; max-width: 500px; height: 400px; border: 1px solid #ccc; overflow-y: auto; margin: 20px auto; padding: 10px; }
+        #userInput { width: 80%; padding: 10px; }
+        button { padding: 10px; cursor: pointer; }
+    </style>
 </head>
 <body>
-    <h1>ChatGPT Instant Access</h1>
-    <p>Click the button below to chat with ChatGPT.</p>
-    <a href="https://chat.openai.com/" target="_blank">
-        <button>Open ChatGPT</button>
-    </a>
+    <h2>Simple Chatbot</h2>
+    <div id="chatbox"></div>
+    <input type="text" id="userInput" placeholder="Type a message..." />
+    <button onclick="sendMessage()">Send</button>
+
+    <script>
+        function sendMessage() {
+            const input = document.getElementById('userInput');
+            const chatbox = document.getElementById('chatbox');
+            const userMessage = input.value.trim();
+            
+            if (userMessage === '') return;
+
+            chatbox.innerHTML += `<p><strong>You:</strong> ${userMessage}</p>`;
+            input.value = '';
+
+            // Simulating chatbot response
+            setTimeout(() => {
+                chatbox.innerHTML += `<p><strong>Bot:</strong> I received: ${userMessage}</p>`;
+                chatbox.scrollTop = chatbox.scrollHeight;
+            }, 1000);
+        }
+    </script>
 </body>
 </html>
