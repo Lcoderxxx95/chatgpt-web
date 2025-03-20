@@ -1,16 +1,25 @@
-function sendMessage() {
-    const input = document.getElementById('userInput');
-    const chatbox = document.getElementById('chatbox');
-    const userMessage = input.value.trim();
-    
-    if (userMessage === '') return;
+document.addEventListener("DOMContentLoaded", function () {
+    const userInput = document.getElementById("userInput");
+    const sendButton = document.getElementById("sendButton");
 
-    chatbox.innerHTML += `<p><strong>You:</strong> ${userMessage}</p>`;
-    input.value = '';
+    function sendMessage() {
+        const message = userInput.value.trim();
+        if (!message) return;
 
-    // Simulating chatbot response
-    setTimeout(() => {
-        chatbox.innerHTML += `<p><strong>Bot:</strong> I received: ${userMessage}</p>`;
-        chatbox.scrollTop = chatbox.scrollHeight;
-    }, 1000);
-}
+        // Redirect to ChatGPT with the user's message pre-filled
+        window.open(`https://chat.openai.com/?q=${encodeURIComponent(message)}`, "_blank");
+
+        // Clear input field after sending
+        userInput.value = "";
+    }
+
+    // Attach event listener to button
+    sendButton.addEventListener("click", sendMessage);
+
+    // Allow "Enter" key to send message
+    userInput.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+            sendMessage();
+        }
+    });
+});
